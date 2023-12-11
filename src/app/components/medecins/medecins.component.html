@@ -1,0 +1,86 @@
+<nav class="bg-blue-500 p-4">
+  <div class="container mx-auto flex justify-between items-center text-white">
+    <a  class="hover:underline">Accueil</a>
+    <a routerLink="/medecins" class="hover:underline">Médecins</a>
+    <a class="hover:underline">Patients</a>
+    <a routerLink="/consultations" class="hover:underline">Consultations</a>
+    <a routerLink="/rendez-vous" class="hover:underline">Rendez-vous</a>
+    <a routerLink="/specialites" class="hover:underline">Spécialités</a>
+    <a routerLink="/contact" class="hover:underline">Contact</a>
+    <!-- Ajoutez d'autres liens ou fonctionnalités selon vos besoins -->
+    <button  class="text-white hover:underline focus:outline-none">Se déconnecter</button>
+  </div>
+</nav>
+
+<div class="container mx-auto mt-8">
+  <h2 class="text-3xl font-semibold mb-4">Liste des Médecins</h2>
+
+  <!-- Affichage de la liste des médecins -->
+  <div class="w-full overflow-x-scroll">
+    <table class="w-full text-left border border-gray-400">
+      <thead class="bg-gray-500 font-semibold text-base text-white">
+        <tr class="flex w-full py-2 border-t border-b border-gray-800">
+          <th class="px-4 w-1/4 flex justify-center">Nom</th>
+          <th class="px-4 w-1/4 flex justify-center">Prénom</th>
+          <th class="px-4 w-1/4 flex justify-center">Adresse</th>
+          <th class="px-4 w-1/4 flex justify-center">Email</th>
+          <th class="px-4 w-1/4 flex justify-center">Spécialité</th>
+          <th class="px-4 w-1/4 flex justify-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-gray-200 flex flex-col items-center">
+        <tr *ngFor="let medecin of medecins" class="flex w-full py-2 border-b-2 border-gray-400">
+          <td class="px-4 w-1/4 flex justify-center">{{ medecin.nom }}</td>
+          <td class="px-4 w-1/4 flex justify-center">{{ medecin.prenom }}</td>
+          <td class="px-4 w-1/4 flex justify-center">{{ medecin.address }}</td>
+          <td class="px-4 w-1/4 flex justify-center">{{ medecin.email || 'Non disponible' }}</td>
+          <td class="px-4 w-1/4 flex justify-center">{{ medecin.speciality?.specialityName || 'Non disponible' }}</td>
+          <td class="px-4 w-1/4 flex justify-center">
+            <button (click)="modifierMedecin(medecin)" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue mr-2">
+              Modifier
+            </button>
+            <button (click)="supprimerMedecin(medecin.id)" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulaire pour ajouter un médecin -->
+  <div class="mt-4">
+    <h2 class="text-xl font-semibold mb-2">Ajouter un Médecin</h2>
+    <form (submit)="ajouterMedecin()">
+      <div class="mb-4">
+        <label for="nom" class="block text-gray-700 text-sm font-medium">Nom</label>
+        <input type="text" id="nom" name="nom" [(ngModel)]="nouveauMedecin.nom" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="prenom" class="block text-gray-700 text-sm font-medium">Prénom</label>
+        <input type="text" id="prenom" name="prenom" [(ngModel)]="nouveauMedecin.prenom" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="address" class="block text-gray-700 text-sm font-medium">Adresse</label>
+        <input type="text" id="address" name="address" [(ngModel)]="nouveauMedecin.address" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-medium">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="nouveauMedecin.email" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="specialite" class="block text-gray-700 text-sm font-medium">Spécialité</label>
+        <select id="specialite" name="specialite" [(ngModel)]="nouveauMedecin.speciality" class="mt-1 p-2 w-full border rounded-md">
+          <option *ngFor="let specialite of specialites" [ngValue]="specialite">{{ specialite.specialityName }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green">
+        Ajouter
+      </button>
+    </form>
+ 

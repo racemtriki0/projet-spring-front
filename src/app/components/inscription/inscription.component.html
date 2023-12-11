@@ -1,0 +1,45 @@
+<!-- inscription.component.html -->
+
+<div class="h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+  <form (submit)="inscrireUtilisateur()" class="flex justify-center items-center h-screen">
+    <div class="w-full max-w-md p-6 bg-white bg-opacity-80 rounded-lg shadow-md">
+      <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Inscription</h2>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="mb-4">
+          <label for="nom" class="block text-gray-700 text-sm font-medium">Nom</label>
+          <input type="text" id="nom" name="nom" [(ngModel)]="nouvelUtilisateur.nom" class="mt-1 p-2 w-full border rounded-md">
+        </div>
+
+        <div class="mb-4">
+          <label for="prenom" class="block text-gray-700 text-sm font-medium">Prénom</label>
+          <input type="text" id="prenom" name="prenom" [(ngModel)]="nouvelUtilisateur.prenom" class="mt-1 p-2 w-full border rounded-md">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-medium">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="nouvelUtilisateur.email" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="address" class="block text-gray-700 text-sm font-medium">Adresse</label>
+        <input type="text" id="address" name="address" [(ngModel)]="nouvelUtilisateur.address" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 text-sm font-medium">Mot de passe</label>
+        <input type="password" id="password" name="password" [(ngModel)]="nouvelUtilisateur.password" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+        S'inscrire
+      </button>
+
+      <!-- Lien de retour à la page de connexion -->
+      <div class="mt-4 text-center">
+        <a (click)="authentification()" class="text-sm text-blue-500 hover:underline">Déjà inscrit ? Connectez-vous ici</a>
+      </div>
+    </div>
+  </form>
+</div>

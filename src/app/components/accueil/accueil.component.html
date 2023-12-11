@@ -1,0 +1,43 @@
+<!-- navbar.component.html -->
+
+<nav class="bg-blue-500 p-4">
+    <div class="container mx-auto flex justify-between items-center text-white">
+      <a (click)="accueil()" class="hover:underline">Accueil</a>
+      <a routerLink="/medecins" class="hover:underline">Médecins</a>
+      <a (click)="patients()" class="hover:underline">Patients</a>
+      <a routerLink="/consultations" class="hover:underline">Consultations</a>
+      <a routerLink="/rendez-vous" class="hover:underline">Rendez-vous</a>
+      <a routerLink="/specialites" class="hover:underline">Spécialités</a>
+      <a routerLink="/contact" class="hover:underline">Contact</a>
+      <!-- Ajoutez d'autres liens ou fonctionnalités selon vos besoins -->
+      <button (click)="deconnecter()" class="text-white hover:underline focus:outline-none">Se déconnecter</button>
+    </div>
+  </nav>
+  <!-- accueil.component.html -->
+  
+  <div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-semibold mb-4">Dernières Publications</h2>
+    
+    <!-- Liste des publications -->
+    <div *ngFor="let publication of publications" class="bg-white p-4 mb-4 rounded-lg shadow-md">
+      <h3 class="text-xl font-semibold mb-2">{{ publication.titre }}</h3>
+      <p class="text-gray-700">{{ publication.contenu }}</p>
+    
+      <!-- Section des commentaires -->
+      <div class="mt-4">
+        <h4 class="text-lg font-semibold mb-2">Commentaires</h4>
+        <div *ngFor="let commentaire of publication.commentaires" class="bg-gray-100 p-2 mb-2 rounded-md">
+          <strong>{{ commentaire.auteur }}</strong>: {{ commentaire.contenu }}
+        </div>
+      </div>
+    
+      <!-- Formulaire pour ajouter un commentaire -->
+      <div class="mt-4">
+        <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="nouveauCommentaire" placeholder="Ajouter un commentaire..." class="p-2 border rounded-md w-full">
+        <button (click)="ajouterCommentaire(publication)" class="mt-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+          Ajouter
+        </button>
+      </div>
+    </div>
+  </div>
+  

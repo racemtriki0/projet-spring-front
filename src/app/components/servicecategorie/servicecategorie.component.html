@@ -1,0 +1,94 @@
+
+      
+<!-- services.component.html -->
+
+<nav class="bg-blue-500 p-4">
+    <div class="container mx-auto flex justify-between items-center text-white">
+      <a routerLink="/accueil" class="hover:underline">Accueil</a>
+      <a routerLink="/medecins" class="hover:underline">Médecins</a>
+      <a routerLink="/patients" class="hover:underline">Patients</a>
+      <a routerLink="/consultations" class="hover:underline">Consultations</a>
+      <a routerLink="/rendez-vous" class="hover:underline">Rendez-vous</a>
+      <a routerLink="/specialites" class="hover:underline">Spécialités</a>
+      <a routerLink="/roles" class="hover:underline">Rôles</a>
+      <a routerLink="/categories" class="hover:underline">Catégories</a>
+      <a routerLink="/services" class="hover:underline">Services</a>
+      <a routerLink="/contact" class="hover:underline">Contact</a>
+      <button class="text-white hover:underline focus:outline-none">Se déconnecter</button>
+    </div>
+  </nav>
+  
+  <div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-semibold mb-4">Liste des Services</h2>
+  
+    <!-- Affichage de la liste des services -->
+    <div class="w-full overflow-x-scroll">
+      <table class="w-full text-left border border-gray-400">
+        <thead class="bg-gray-500 font-semibold text-base text-white">
+          <tr class="flex w-full py-2 border-t border-b border-gray-800">
+            <th class="px-4 w-1/6 flex justify-center">ID</th>
+            <th class="px-4 w-1/6 flex justify-center">Nom</th>
+            <th class="px-4 w-1/6 flex justify-center">Description</th>
+            <th class="px-4 w-1/6 flex justify-center">Prix</th>
+            <th class="px-4 w-1/6 flex justify-center">Durée</th>
+            <th class="px-4 w-1/6 flex justify-center">Catégorie</th>
+            <th class="px-4 w-1/6 flex justify-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-200 flex flex-col items-center">
+          <tr *ngFor="let service of services" class="flex w-full py-2 border-b-2 border-gray-400">
+            <td class="px-4 w-1/6 flex justify-center">{{ service.id }}</td>
+            <td class="px-4 w-1/6 flex justify-center">{{ service.libelle }}</td>
+            <td class="px-4 w-1/6 flex justify-center">{{ service.service_description }}</td>
+            <td class="px-4 w-1/6 flex justify-center">{{ service.price }}</td>
+            <td class="px-4 w-1/6 flex justify-center">{{ service.service_duration }}</td>
+            <td class="px-4 w-1/6 flex justify-center">{{ service.serviceCategory.libelle }}</td>
+            <td class="px-4 w-1/6 flex justify-center">
+              <button (click)="modifierService(service)" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue mr-2">
+                Modifier
+              </button>
+              <button (click)="supprimerService(service.id)" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Formulaire pour ajouter un service -->
+    <div class="mt-4">
+      <h2 class="text-xl font-semibold mb-2">Ajouter un Service</h2>
+      <form (submit)="ajouterService()">
+        <form (submit)="ajouterService()">
+            <div class="mb-4">
+              <label for="libelle" class="block text-gray-700 text-sm font-medium">Nom du Service</label>
+              <input type="text" id="libelle" name="libelle" [(ngModel)]="nouveauService.libelle" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="mb-4">
+              <label for="description" class="block text-gray-700 text-sm font-medium">Description du Service</label>
+              <input type="text" id="description" name="description" [(ngModel)]="nouveauService.service_description" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="mb-4">
+              <label for="prix" class="block text-gray-700 text-sm font-medium">Prix du Service</label>
+              <input type="number" id="prix" name="prix" [(ngModel)]="nouveauService.price" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="mb-4">
+              <label for="duree" class="block text-gray-700 text-sm font-medium">Durée du Service</label>
+              <input type="text" id="duree" name="duree" [(ngModel)]="nouveauService.service_duration" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="mb-4">
+              <label for="categorie" class="block text-gray-700 text-sm font-medium">Catégorie du Service</label>
+              <select id="categorie" name="categorie" [(ngModel)]="nouveauService.serviceCategory.id" class="mt-1 p-2 w-full border rounded-md">
+                <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.libelle }}</option>
+              </select>
+            </div>
+            <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green">
+              Ajouter
+            </button>
+          </form>
+      </form>
+    </div>
+  </div>
+   
+  

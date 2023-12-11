@@ -1,0 +1,11 @@
+// app.config.ts
+
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+// Importez les routes depuis app-routing.module
+import { routes } from './app-routing.module';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes)]
+};

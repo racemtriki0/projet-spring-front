@@ -1,0 +1,59 @@
+<!-- roles.component.html -->
+
+<nav class="bg-blue-500 p-4">
+    <div class="container mx-auto flex justify-between items-center text-white">
+      <a routerLink="/accueil" class="hover:underline">Accueil</a>
+      <a routerLink="/medecins" class="hover:underline">Médecins</a>
+      <a routerLink="/patients" class="hover:underline">Patients</a>
+      <a routerLink="/consultations" class="hover:underline">Consultations</a>
+      <a routerLink="/rendez-vous" class="hover:underline">Rendez-vous</a>
+      <a routerLink="/specialites" class="hover:underline">Spécialités</a>
+      <a routerLink="/roles" class="hover:underline">Rôles</a>
+      <a routerLink="/contact" class="hover:underline">Contact</a>
+      <button class="text-white hover:underline focus:outline-none">Se déconnecter</button>
+    </div>
+  </nav>
+  
+  <div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-semibold mb-4">Liste des Rôles</h2>
+  
+    <!-- Affichage de la liste des rôles -->
+    <div class="w-full overflow-x-scroll">
+      <table class="w-full text-left border border-gray-400">
+        <thead class="bg-gray-500 font-semibold text-base text-white">
+          <tr class="flex w-full py-2 border-t border-b border-gray-800">
+            <th class="px-4 w-1/2 flex justify-center">Nom du Rôle</th>
+            <th class="px-4 w-1/2 flex justify-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-200 flex flex-col items-center">
+          <tr *ngFor="let role of roles" class="flex w-full py-2 border-b-2 border-gray-400">
+            <td class="px-4 w-1/2 flex justify-center">{{ role.libelle }}</td>
+            <td class="px-4 w-1/2 flex justify-center">
+              <button (click)="modifierRole(role)" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue mr-2">
+                Modifier
+              </button>
+              <button (click)="supprimerRole(role.id)" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Formulaire pour ajouter un rôle -->
+    <div class="mt-4">
+      <h2 class="text-xl font-semibold mb-2">Ajouter un Rôle</h2>
+      <form (submit)="ajouterRole()">
+        <div class="mb-4">
+          <label for="libelle" class="block text-gray-700 text-sm font-medium">Nom du Rôle</label>
+          <input type="text" id="libelle" name="libelle" [(ngModel)]="nouveauRole.libelle" class="mt-1 p-2 w-full border rounded-md">
+        </div>
+        <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green">
+          Ajouter
+        </button>
+      </form>
+    </div>
+  </div>
+  
